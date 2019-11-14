@@ -1,0 +1,26 @@
+{
+  "name": "npm_intro",
+  "version": "1.0.0",
+  "description": "An introduction to NPM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/miyawingz/npm_intro.git"
+  },
+  "author": "Mia Zhang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/miyawingz/npm_intro/issues"
+  },
+  "homepage": "https://github.com/miyawingz/npm_intro#readme",
+  "devDependencies": {
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
+}
