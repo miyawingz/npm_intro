@@ -1,28 +1,59 @@
 import addToDom from "./add_to_dom";
-import * as calc from "./calc";
-//import doMath, { add as plus, subtract, multiply, divide } from "./calc";
-import $ from "jquery";
+import axios from 'axios';
 
-addToDom("dynamically added");
+const url = 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json';
 
-// addToDom(`12 + 98 = ${plus(12, 98)}`);
+getMovies();
 
-// addToDom(`12 - 98 = ${subtract(12, 98)}`);
+async function getMovies() {
+    const resp = await axios.get(url);
+    const movies = resp.data.feed.entry;
 
-// addToDom(`32 + 44 = ${doMath(32, "+", 44)}`);
+    movies.forEach((movie, index) => {
+        addToDom(`${index + 1}. ${movie['im:name'].label}`)
+    });
+}
 
-// addToDom(`32 x 44 = ${multiply(32, 44)}`);
+async function fetchGetMovies() {
+    const resp = await fetch(url);
+    const data = await resp.json();
+    const movies = data.feed.entry;
 
-// addToDom(`32 / 44 = ${divide(32, 44)}`);
+    movies.forEach((movie, index) => {
+        addToDom(`${index + 1}. ${movie['im:name'].label}`)
+    });
+}
 
-addToDom(`12 + 98 = ${calc.add(12, 98)}`);
+// function getMovies() {
+//     axios.get(url).then((resp) => {
+//         const movies = resp.data.feed.entry;
 
-addToDom(`12 - 98 = ${calc.subtract(12, 98)}`);
+//         movies.forEach((movie, index) => {
+//             addToDom(`${index + 1}. ${movie['im:name'].label}`)
+//         });
+//     })
+// }
 
-addToDom(`32 + 44 = ${calc.default(32, "+", 44)}`);
+// fetch(url).then((resp) => {
+//     return resp.json();
+// }).then((data) => {
+//     const movies = data.feed.entry;
+//     console.log(movies);
+//     movies.forEach((movie, index) => {
+//         addToDom(`${index + 1}. ${movie['im:name'].label}`)
+//     })
+// })
 
-addToDom(`32 x 44 = ${calc.multiply(32, 44)}`);
+// const myPromise = new Promise(function (resolve, reject) {
+//     console.log('create promise')
+//     setTimeout(function () {
+//         //resolve("inside setTimeOut");
+//         reject("wrong");
+//     }, 2000);
+// });
 
-addToDom(`32 / 44 = ${calc.divide(32, 44)}`);
-
-$("#root").append("<h1>created by jquery</h1>")
+// myPromise.then(function (data) {
+//     console.log('data from promise', data)
+// }).catch(function (error) {
+//     console.log('error:', error)
+// });
